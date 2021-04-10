@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.dao.UserDao">
+
+	<select id="videos" parameterType="com.ssm.po.video" resultType="com.ssm.po.video">
+	select * from video 
+	</select>
+	
+	<select id="look" parameterType="com.ssm.po.Timeswatched" resultType="com.ssm.po.Timeswatched">
+	SELECT * FROM `timeswatche`
+	</select>
+	
+	<update id="lookupdate" parameterType="com.ssm.po.Timeswatched">
+	UPDATE `timeswatche` SET `look`=#{look}
+	</update>
+	
+
+	<select id="login" parameterType="com.ssm.po.User" resultType="com.ssm.po.User">
+	select * from users where userName=#{userName} and passWord=#{passWord}
+	</select>
+	
+
+	<select id="addUserCheckUser" parameterType="com.ssm.po.User" resultType="com.ssm.po.User">
+	select * from users where userName=#{userName}
+	</select>
+	
+	<select id="addUserCheckidCard" parameterType="com.ssm.po.User" resultType="com.ssm.po.User">
+	select * from users where idCard=#{idCard}
+	</select>
+	
+	<insert id="addUser" parameterType="com.ssm.po.User">
+	insert into users(userName,passWord,email,phone,idCard)
+	values(#{userName},#{passWord},#{email},#{phone},#{idCard})
+	</insert>
+	
+	<insert id="shop" parameterType="com.ssm.po.Shop">
+	insert into shop(cid,cname,price,quantity,sum,userid,shipment)
+	values(#{cid},#{cname},#{price},#{Quantity},#{sum},#{userid},'未出貨')
+	</insert>
+	<select id="findCommit" parameterType="com.ssm.po.Com"  resultType="com.ssm.po.Com">
+	select * from commit where id=#{id}
+	</select>
+	<select id="encryption" parameterType="com.ssm.po.User" resultType="com.ssm.po.User">
+	select * from users where userName=#{userName}
+	</select>
+	<select id="select" parameterType="com.ssm.po.Shop" resultType="com.ssm.po.Shop">
+	select * from shop where userid=#{userid}
+	</select>
+	
+	<select id="selects" parameterType="com.ssm.po.Shop" resultType="com.ssm.po.Shop">
+	SELECT * FROM `shop` WHERE shipment='已出貨';
+	</select>
+	
+	<select id="selectss" parameterType="com.ssm.po.Shop" resultType="com.ssm.po.Shop">
+	SELECT * FROM `shop` WHERE shipment='未出貨';
+	</select>
+	
+	<update id="upselect" parameterType="com.ssm.po.Shop">
+	update shop set shipment=#{shipment}
+	where id=#{id}
+	</update>
+	
+	<insert id="problemrequest" parameterType="com.ssm.po.problem">
+	insert into problem(userName,email,phone,problem,mytextarea,response,rep)
+	values(#{userName},#{email},#{phone},#{problem},#{mytextarea},'1','')
+	</insert>
+	
+	<update id="problemresponse" parameterType="com.ssm.po.problem">
+		update problem set response='2',rep=#{rep}
+		where id=#{id}
+	</update>
+	
+	<select id="presponse" parameterType="com.ssm.po.problem" resultType="com.ssm.po.problem">
+	select * from problem where response='1';
+	</select>
+	
+		<select id="presponsereceive" parameterType="com.ssm.po.problem" resultType="com.ssm.po.problem">
+	select * from problem where response='2' and userName=#{userName};
+	</select>
+	
+	<select id="administratorlogin" parameterType="com.ssm.po.administrator" resultType="com.ssm.po.administrator"> 
+	select * from administrator where administrator=#{administrator} and password=#{passwod}
+	</select>
+	
+	<insert id="temporarystorage" parameterType="com.ssm.po.Shop">
+	insert into temporarystorage(cid,cname,price,quantity,sum,userid)
+		values(#{cid},#{cname},#{price},#{Quantity},#{sum},#{userid})
+	</insert>
+	
+	<select id="temporarystorageselect" parameterType="com.ssm.po.Shop" resultType="com.ssm.po.Shop">
+		select * from  temporarystorage where userid=#{userid}
+	</select>
+	
+
+	<select id="upUserSelect" parameterType="com.ssm.po.User" resultType="com.ssm.po.User">
+	select * from users where userName=#{userName} and email=#{email}
+	</select>
+	<update id="upUser" parameterType="com.ssm.po.User" >
+	update users set passWord=#{passWord}
+	where userName=#{userName} and email=#{email}
+	</update>
+	
+	
+	
+
+	</mapper>
